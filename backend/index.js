@@ -1,7 +1,25 @@
 const express = require("express"); // creating the server
 const app = express();
-app.use(express.json);
+app.use(express.json()); // middleware
+app.use(express.urlencoded({ extended: true })); // middleware
+
 const mongoose = require("mongoose"); // connecting to database
+const productRoutes = require("./routes/productRoutes");
+app.use("/products", productRoutes);
+
+const customerRoutes = require("./routes/customerRoutes");
+app.use("/customers", customerRoutes);
+
+const transactionRoutes = require("./routes/transactionRoutes");
+app.use("/transactions", transactionRoutes);
+
+
+const orderRoutes = require("./routes/orderRoutes");
+app.use("/orders", orderRoutes);
+
+
+
+
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/production")
@@ -19,5 +37,7 @@ app.listen(3000, (err, success) => {
   }
 }); //where my services will called()
 
-const productRoutes = require("./routes/productRoutes");
-app.use("/products", productRoutes);
+
+
+
+

@@ -1,27 +1,23 @@
 const mongoose = require("mongoose"); 
 const Schema = mongoose.Schema
-const ProductSchema = new Schema(
+const TransactionSchema = new Schema(
     {
-        productName:{
+        payment_status:{
             type: String,
-            // required: true, 
+            required: true, 
             trim : true
         },
-        productDetails:{
-            type: String,
-            // required: true,
-            trim : true
+        transaction_date:{
+            type: Date,
+            default: Date.now,
+            // default: Date.now
         },
-        productPrice:{
+        payment_amount:{
             type: Number,
-            // required: true,
+            required: true,
             trim : true
         },
-        productQuantity:{
-            type: Number,
-            // required: true,
-            trim : true
-        },
+       
         createdAt:{
             type: Date,
             default: Date.now
@@ -37,4 +33,4 @@ const ProductSchema = new Schema(
 )
 
 
-module.exports = mongoose.model('Product',ProductSchema)
+module.exports = mongoose.model('Transaction',TransactionSchema)
