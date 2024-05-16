@@ -18,6 +18,26 @@ const orderRoutes = require("./routes/orderRoutes");
 app.use("/orders", orderRoutes);
 
 
+const feedbackRoutes = require("./routes/feedbackRoutes");
+app.use("/feedbacks", feedbackRoutes);
+
+
+const adminRoutes = require("./routes/adminRoutes");
+app.use("/admins", adminRoutes);
+
+
+const categoryRoutes = require("./routes/categoryRoutes");
+app.use("/categories", categoryRoutes);
+
+
+const subCategoryRoutes = require("./routes/subCategoryRoutes");
+app.use("/subcategories", subCategoryRoutes);
+
+
+// const statusRoutes = require("./routes/statusRoutes");
+// app.use("/statuses", statusRoutes);
+
+
 
 
 

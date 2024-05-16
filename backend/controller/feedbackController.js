@@ -1,74 +1,75 @@
-const customerSchema = require("../model/customerModel");
+const feedbackSchema = require('../model/feedbackModel')
 
-exports.addCustomer = (req,res) => {
-    const customer = new customerSchema(req.body);
-    customer.save().then((data) => {
+exports.createFeedback = (req,res) => {
+    const feedback = new feedbackSchema(req.body);
+    feedback.save()
+    .then((data)=>{
         if(!data)
         {
             res.json({
-                message: "Somthing went wrong while adding the customer",
-                ststus: 400,
+                message: "Something went wrong while saving feedback",
+                status: 400,
                 error: err,
             });
         }
         else
         {
             res.json({
-                message: "Customer add successfully",
+                message: "feedback Saved Successfully",
                 status: 200,
                 data: data,
-              });
+            });
         }
     }).catch((err)=>{
         res.json({
-            message: "Something went wrong while adding the customer",
-            status: 400,
-            error: err,
-          });
+            message: "Something went wrong while saving feedback",
+                status: 400,
+                error: err,
+        });
     })
 }
 
-exports.getAllCustomer = (req,res) => {
-    customerSchema.find().then((data)=>{
+exports.getAllFeedback = (req,res) => {
+    feedbackSchema.find().then((data)=>{
         if(!data)
         {
             res.json({
-                message: "Something went wrong while fetching the customer",
+                message: "Something went wrong while fetching feedback",
                 status: 400,
                 error: err,
-              });
+            });
         }
         else
         {
             res.json({
-                message: "Customer fetch successfully",
+                message: "Feedback fetched Successfully",
                 status: 200,
                 data: data,
-              });
+            });
         }
     }).catch((err)=>{
         res.json({
-            message: "Something went wrong while fetching the customer",
-            status: 400,
-            error: err,
-          });
+            message: "Something went wrong while fetching feedback",
+                status: 400,
+                error: err,
+        });
     })
 }
 
-exports.getCustomerById = (req, res) => {
+exports.getFeedbackById = (req, res) => {
     // const proId = req.params.id;
-    customerSchema
+    feedbackSchema
       .findById(req.params.id)
       .then((data) => {
         if (!data) {
           res.json({
-            message: "Something went wrong while fetching the Customer",
+            message: "Something went wrong while fetching the feedback.",
             status: 400,
             error: err,
           });
         } else {
           res.json({
-            message: "Customer fetched successfully",
+            message: "Feedback fetched successfully.",
             status: 200,
             data: data,
           });
@@ -76,15 +77,15 @@ exports.getCustomerById = (req, res) => {
       })
       .catch((err) => {
         res.json({
-          message: "Something went wrong while fetching the Customer",
+          message: "Something went wrong while fetching the feedback.",
           status: 400,
           error: err,
         });
       });
   };
   
-  exports.updateCustomerById = (req, res) => {
-    customerSchema
+  exports.updateFeedbackById = (req, res) => {
+    feedbackSchema
       .findOneAndUpdate(
         {
           _id: req.params.id,
@@ -94,49 +95,55 @@ exports.getCustomerById = (req, res) => {
       .then((data) => {
         if (!data) {
           res.json({
-            message: "Something went wrong while updating the Customer",
+            message: "Something went wrong while updating the feedback",
             status: 400,
             error: err,
           });
         } else {
           res.json({
-            message: "Customer updated successfully",
+            message: "Feedback updated successfully",
             status: 200,
             data: data,
           });
         }
+      }).catch((err) => {
+        res.json({
+            message: "Something went wrong while deleting the All feedback",
+            status: 400,
+            error: err,
+        })
       })
   };
 
-  exports.deleteAllCustomer = (req,res) => {
-    customerSchema.deleteMany()
+  exports.deleteAllFeedback = (req,res) => {
+    feedbackSchema.deleteMany()
     .then((data) => {
       if(!data){
         res.json({
-          message: "Something went wrong while deleting the All customer",
+          message: "Something went wrong while deleting the All feedback",
             status: 400,
             error: err,
         });
       }else{
         res.json({
-          message: "All Customer deleted Successfully",
+          message: "All Feedback deleted Successfully",
             status: 200,
             data: data,
         });
       }
     }).catch((err) => {
       res.json({
-        message: "Something went wrong while deleting the All customer",
+        message: "Something went wrong while deleting the All feedback",
             status: 400,
             error: err,
       })
     })
   }
 
-  exports.deleteCustomerById = (req,res) => {
+  exports.deleteFeedbackById = (req,res) => {
     const id = req.params.id;
     console.log(id);
-    customerSchema.findOneAndDelete(
+    feedbackSchema.findOneAndDelete(
       {
         _id : id,
       },
@@ -144,20 +151,20 @@ exports.getCustomerById = (req, res) => {
     .then((data) => {
       if(!data){
         res.json({
-          message: "Something went wrong while deleting the customer",
+          message: "Something went wrong while deleting the feedback",
             status: 400,
             error: err,
         });
       }else{
         res.json({
-          message: "Customer deleted Successfully",
+          message: "Feedback deleted Successfully",
             status: 200,
             data: data,
         });
       }
     }).catch((err) => {
       res.json({
-        message: "Something went wrong while deleting the customer",
+        message: "Something went wrong while deleting the feedback",
             status: 400,
             error: err,
       })

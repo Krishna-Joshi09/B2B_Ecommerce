@@ -1,74 +1,75 @@
-const customerSchema = require("../model/customerModel");
+const categorySchema = require('../model/categoryModel')
 
-exports.addCustomer = (req,res) => {
-    const customer = new customerSchema(req.body);
-    customer.save().then((data) => {
+exports.createCategory = (req,res) => {
+    const category = new categorySchema(req.body);
+    category.save()
+    .then((data)=>{
         if(!data)
         {
             res.json({
-                message: "Somthing went wrong while adding the customer",
-                ststus: 400,
+                message: "Something went wrong while saving category",
+                status: 400,
                 error: err,
             });
         }
         else
         {
             res.json({
-                message: "Customer add successfully",
+                message: "category Saved Successfully",
                 status: 200,
                 data: data,
-              });
+            });
         }
     }).catch((err)=>{
         res.json({
-            message: "Something went wrong while adding the customer",
-            status: 400,
-            error: err,
-          });
+            message: "Something went wrong while saving category",
+                status: 400,
+                error: err,
+        });
     })
 }
 
-exports.getAllCustomer = (req,res) => {
-    customerSchema.find().then((data)=>{
+exports.getAllCategory = (req,res) => {
+    categorySchema.find().then((data)=>{
         if(!data)
         {
             res.json({
-                message: "Something went wrong while fetching the customer",
+                message: "Something went wrong while fetching category",
                 status: 400,
                 error: err,
-              });
+            });
         }
         else
         {
             res.json({
-                message: "Customer fetch successfully",
+                message: "category fetched Successfully",
                 status: 200,
                 data: data,
-              });
+            });
         }
     }).catch((err)=>{
         res.json({
-            message: "Something went wrong while fetching the customer",
-            status: 400,
-            error: err,
-          });
+            message: "Something went wrong while fetching category",
+                status: 400,
+                error: err,
+        });
     })
 }
 
-exports.getCustomerById = (req, res) => {
+exports.getCategoryById = (req, res) => {
     // const proId = req.params.id;
-    customerSchema
+    categorySchema
       .findById(req.params.id)
       .then((data) => {
         if (!data) {
           res.json({
-            message: "Something went wrong while fetching the Customer",
+            message: "Something went wrong while fetching the category.",
             status: 400,
             error: err,
           });
         } else {
           res.json({
-            message: "Customer fetched successfully",
+            message: "category fetched successfully.",
             status: 200,
             data: data,
           });
@@ -76,15 +77,15 @@ exports.getCustomerById = (req, res) => {
       })
       .catch((err) => {
         res.json({
-          message: "Something went wrong while fetching the Customer",
+          message: "Something went wrong while fetching the category.",
           status: 400,
           error: err,
         });
       });
   };
   
-  exports.updateCustomerById = (req, res) => {
-    customerSchema
+  exports.updateCategoryById = (req, res) => {
+    categorySchema
       .findOneAndUpdate(
         {
           _id: req.params.id,
@@ -94,49 +95,55 @@ exports.getCustomerById = (req, res) => {
       .then((data) => {
         if (!data) {
           res.json({
-            message: "Something went wrong while updating the Customer",
+            message: "Something went wrong while updating the category",
             status: 400,
             error: err,
           });
         } else {
           res.json({
-            message: "Customer updated successfully",
+            message: "category updated successfully",
             status: 200,
             data: data,
           });
         }
+      }).catch((err) => {
+        res.json({
+            message: "Something went wrong while deleting the All category",
+            status: 400,
+            error: err,
+        })
       })
   };
 
-  exports.deleteAllCustomer = (req,res) => {
-    customerSchema.deleteMany()
+  exports.deleteAllCategory = (req,res) => {
+    categorySchema.deleteMany()
     .then((data) => {
       if(!data){
         res.json({
-          message: "Something went wrong while deleting the All customer",
+          message: "Something went wrong while deleting the All category",
             status: 400,
             error: err,
         });
       }else{
         res.json({
-          message: "All Customer deleted Successfully",
+          message: "All category deleted Successfully",
             status: 200,
             data: data,
         });
       }
     }).catch((err) => {
       res.json({
-        message: "Something went wrong while deleting the All customer",
+        message: "Something went wrong while deleting the All category",
             status: 400,
             error: err,
       })
     })
   }
 
-  exports.deleteCustomerById = (req,res) => {
+  exports.deleteCategoryById = (req,res) => {
     const id = req.params.id;
     console.log(id);
-    customerSchema.findOneAndDelete(
+    categorySchema.findOneAndDelete(
       {
         _id : id,
       },
@@ -144,20 +151,20 @@ exports.getCustomerById = (req, res) => {
     .then((data) => {
       if(!data){
         res.json({
-          message: "Something went wrong while deleting the customer",
+          message: "Something went wrong while deleting the category",
             status: 400,
             error: err,
         });
       }else{
         res.json({
-          message: "Customer deleted Successfully",
+          message: "category deleted Successfully",
             status: 200,
             data: data,
         });
       }
     }).catch((err) => {
       res.json({
-        message: "Something went wrong while deleting the customer",
+        message: "Something went wrong while deleting the category",
             status: 400,
             error: err,
       })

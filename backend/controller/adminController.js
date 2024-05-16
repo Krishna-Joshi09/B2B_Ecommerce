@@ -1,74 +1,75 @@
-const customerSchema = require("../model/customerModel");
+const adminSchema = require('../model/adminModel')
 
-exports.addCustomer = (req,res) => {
-    const customer = new customerSchema(req.body);
-    customer.save().then((data) => {
+exports.createAdmin = (req,res) => {
+    const admin = new adminSchema(req.body);
+    admin.save()
+    .then((data)=>{
         if(!data)
         {
             res.json({
-                message: "Somthing went wrong while adding the customer",
-                ststus: 400,
+                message: "Something went wrong while saving admin",
+                status: 400,
                 error: err,
             });
         }
         else
         {
             res.json({
-                message: "Customer add successfully",
+                message: "Admin Saved Successfully",
                 status: 200,
                 data: data,
-              });
+            });
         }
     }).catch((err)=>{
         res.json({
-            message: "Something went wrong while adding the customer",
-            status: 400,
-            error: err,
-          });
+            message: "Something went wrong while saving admin",
+                status: 400,
+                error: err,
+        });
     })
 }
 
-exports.getAllCustomer = (req,res) => {
-    customerSchema.find().then((data)=>{
+exports.getAllAdmin = (req,res) => {
+    adminSchema.find().then((data)=>{
         if(!data)
         {
             res.json({
-                message: "Something went wrong while fetching the customer",
+                message: "Something went wrong while fetching admin",
                 status: 400,
                 error: err,
-              });
+            });
         }
         else
         {
             res.json({
-                message: "Customer fetch successfully",
+                message: "Admin fetched Successfully",
                 status: 200,
                 data: data,
-              });
+            });
         }
     }).catch((err)=>{
         res.json({
-            message: "Something went wrong while fetching the customer",
-            status: 400,
-            error: err,
-          });
+            message: "Something went wrong while fetching admin",
+                status: 400,
+                error: err,
+        });
     })
 }
 
-exports.getCustomerById = (req, res) => {
+exports.getAdminById = (req, res) => {
     // const proId = req.params.id;
-    customerSchema
+    adminSchema
       .findById(req.params.id)
       .then((data) => {
         if (!data) {
           res.json({
-            message: "Something went wrong while fetching the Customer",
+            message: "Something went wrong while fetching the admin.",
             status: 400,
             error: err,
           });
         } else {
           res.json({
-            message: "Customer fetched successfully",
+            message: "Admin fetched successfully.",
             status: 200,
             data: data,
           });
@@ -76,15 +77,15 @@ exports.getCustomerById = (req, res) => {
       })
       .catch((err) => {
         res.json({
-          message: "Something went wrong while fetching the Customer",
+          message: "Something went wrong while fetching the admin.",
           status: 400,
           error: err,
         });
       });
   };
   
-  exports.updateCustomerById = (req, res) => {
-    customerSchema
+  exports.updateAdminById = (req, res) => {
+    adminSchema
       .findOneAndUpdate(
         {
           _id: req.params.id,
@@ -94,49 +95,55 @@ exports.getCustomerById = (req, res) => {
       .then((data) => {
         if (!data) {
           res.json({
-            message: "Something went wrong while updating the Customer",
+            message: "Something went wrong while updating the admin",
             status: 400,
             error: err,
           });
         } else {
           res.json({
-            message: "Customer updated successfully",
+            message: "Admin updated successfully",
             status: 200,
             data: data,
           });
         }
+      }).catch((err) => {
+        res.json({
+            message: "Something went wrong while deleting the All admin",
+            status: 400,
+            error: err,
+        })
       })
   };
 
-  exports.deleteAllCustomer = (req,res) => {
-    customerSchema.deleteMany()
+  exports.deleteAllAdmin = (req,res) => {
+    adminSchema.deleteMany()
     .then((data) => {
       if(!data){
         res.json({
-          message: "Something went wrong while deleting the All customer",
+          message: "Something went wrong while deleting the All admin",
             status: 400,
             error: err,
         });
       }else{
         res.json({
-          message: "All Customer deleted Successfully",
+          message: "All Admin deleted Successfully",
             status: 200,
             data: data,
         });
       }
     }).catch((err) => {
       res.json({
-        message: "Something went wrong while deleting the All customer",
+        message: "Something went wrong while deleting the All admin",
             status: 400,
             error: err,
       })
     })
   }
 
-  exports.deleteCustomerById = (req,res) => {
+  exports.deleteAdminById = (req,res) => {
     const id = req.params.id;
     console.log(id);
-    customerSchema.findOneAndDelete(
+    adminSchema.findOneAndDelete(
       {
         _id : id,
       },
@@ -144,20 +151,20 @@ exports.getCustomerById = (req, res) => {
     .then((data) => {
       if(!data){
         res.json({
-          message: "Something went wrong while deleting the customer",
+          message: "Something went wrong while deleting the admin",
             status: 400,
             error: err,
         });
       }else{
         res.json({
-          message: "Customer deleted Successfully",
+          message: "Admin deleted Successfully",
             status: 200,
             data: data,
         });
       }
     }).catch((err) => {
       res.json({
-        message: "Something went wrong while deleting the customer",
+        message: "Something went wrong while deleting the admin",
             status: 400,
             error: err,
       })
