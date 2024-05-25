@@ -34,15 +34,15 @@ const subCategoryRoutes = require("./routes/subCategoryRoutes");
 app.use("/subcategories", subCategoryRoutes);
 
 
-// const statusRoutes = require("./routes/statusRoutes");
-// app.use("/statuses", statusRoutes);
+const statusRoutes = require("./routes/statusRoutes");
+app.use("/statuses", statusRoutes);
 
 
 
 
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/production")
+  .connect("mongodb://127.0.0.1:27017/B2B_Ecommerce")
   .then((sucess) => {
     console.log("Database is connected");
   })
