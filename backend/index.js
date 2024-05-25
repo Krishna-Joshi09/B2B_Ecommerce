@@ -38,9 +38,6 @@ const statusRoutes = require("./routes/statusRoutes");
 app.use("/statuses", statusRoutes);
 
 
-
-
-
 mongoose
   .connect("mongodb://127.0.0.1:27017/B2B_Ecommerce")
   .then((sucess) => {
@@ -53,11 +50,7 @@ app.listen(3000, (err, success) => {
   if (err) {
     console.log(err);
   } else {
-    console.log("Server is running on port=>"+3000);
+    console.log("Server is running on port=>" + 3000);
   }
-}); //where my services will called()
-
-
-
-
-
+});
+ //where my services will called()

@@ -3,16 +3,7 @@ const Schema = mongoose.Schema
 
 const OrderSchema = new Schema(
     {
-    order_date:{
-        type: Date,
-        // required: true, 
-        trim : true,
-    },
-    order_status:{
-        type: String,
-        // required: true,
-        trim : true,
-    },
+
     payment_method:{
         type: String,
         // required: true,

@@ -2,11 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema
 const TransactionSchema = new Schema(
     {
-        payment_status:{
-            type: String,
-            required: true, 
-            trim : true
-        },
+        
         transaction_date:{
             type: Date,
             default: Date.now,
