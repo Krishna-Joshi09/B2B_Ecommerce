@@ -1,11 +1,14 @@
 const express = require('express');
-const router = express.Router()
+const router = express.Router();
 const customerController = require("../controller/customerController");
+
 
 const validate = require("../middleware/zodMiddleWare");
 const customerValidation = require("../utils/customerValidation");
 
-router.post('/customer',validate(customerValidation),customerController.addCustomer);
+
+router.post('/customer', validate(customerValidation),customerController.addCustomer);
+
 
 
 

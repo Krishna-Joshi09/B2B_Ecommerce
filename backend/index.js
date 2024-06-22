@@ -1,7 +1,29 @@
 const express = require("express"); // creating the server
 const app = express();
+
+const multer  = require('multer');
+//const upload = multer();
+const upload = multer({
+  storage:multer.diskStorage({
+    destination:function(req,file,cb)
+    {
+      cb(null,"Uploads")
+    },
+    filename: function(req,file,cb)
+    {
+      cb(null,file.filename+"-"+Date.now()+".png")
+    }
+  })
+
+}).array("user_file",12);
+
+app.post("/upload",upload,(req,res) =>{
+  res.send("file upload")
+});
+
+
 app.use(express.json()); // middleware
-app.use(express.urlencoded({ extended: true })); // middleware
+app.use(express.urlencoded({ extended: false })); // middleware
 
 const mongoose = require("mongoose"); // connecting to database
 const productRoutes = require("./routes/productRoutes");
@@ -38,6 +60,15 @@ const statusRoutes = require("./routes/statusRoutes");
 app.use("/statuses", statusRoutes);
 
 
+
+// app.post ('/upload',upload.single("user_file"),(req,res) =>{ 
+//   console.log (req.body);
+//   console.log(req.file);
+
+//   return res.redirect("/");
+// });
+
+
 mongoose
   .connect("mongodb://127.0.0.1:27017/B2B_Ecommerce")
   .then((sucess) => {
@@ -53,4 +84,5 @@ app.listen(3000, (err, success) => {
     console.log("Server is running on port=>" + 3000);
   }
 });
- //where my services will called()
+  
+module.exports = upload

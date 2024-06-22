@@ -1,4 +1,5 @@
 const mongoose = require("mongoose"); 
+const { string } = require("zod");
 const Schema = mongoose.Schema
 
 const CustomerSchema = new Schema(
@@ -8,6 +9,11 @@ const CustomerSchema = new Schema(
         // required: true, 
         trim : true,
     },
+    // user_file:{
+    //     type: String,
+    //     // required: true, 
+    //     trim : true,
+    // },
     customer_contact_no:{
         type: Number,
         // required: true,

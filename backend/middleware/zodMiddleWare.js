@@ -8,7 +8,7 @@ const validate = (schema) => async (req, res, next) => {
       });
       return next();
     } catch (err) {
-      return res.json({
+      return res.json({ 
         message: "Something went wrong while validate the request",
         status: 400,
         error: err,
